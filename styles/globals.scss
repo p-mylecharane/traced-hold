@@ -1,0 +1,179 @@
+@font-face {
+  font-family: 'CS';
+  src: url('/type/Century_Schoolbook_Reg_.woff');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CS';
+  src: url('/type/Century_Schoolbook_Ita_.woff');
+  font-style: italic;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 1vw;
+  @media (max-width: 670px) {
+    font-size: 0.4rem;
+  }
+}
+
+body {
+  font-family: 'CS';
+  font-size: 3.2rem;
+  line-height: 1.1;
+  padding: .5em;
+  background: white;
+  overflow-y: hidden;
+}
+
+// .images {
+//   position: fixed;
+//   top: .5em;
+//   right: .5em;
+//   bottom: .5em;
+//   left: .5em;
+//   z-index: 0;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+
+//   figure {
+//     max-height: 98vh;
+//     background-color: white;
+//     &:not(:first-of-type) {
+//       display: none;
+//     }
+//     img {
+//       max-width: 100%;
+//       display: block;
+//     }
+//   }
+// }
+
+.images_count {
+  position: fixed;
+  top: 50%;
+  left: .5em;
+  transform: translateY(-50%);
+  width: calc(100% - 1em);
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
+.intro {
+  position: absolute;
+  top: 0;
+  left: .5em;
+  right: .5em;
+  width: calc(100% - 1em);
+  text-align: center;
+  color: white;
+  mix-blend-mode: difference;
+  z-index: 1;
+}
+
+footer {
+  position: absolute;
+  bottom: .5em;
+  left: .5em;
+  right: .5em;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  color: white;
+  mix-blend-mode: difference;
+  z-index: 1;
+  div {
+    text-align: center;
+  }
+}
+
+h1, h2 {
+  font-weight: normal;
+  font-size: 3.2rem;
+  text-transform: uppercase;
+}
+
+h1 {
+  display: inline-block;
+}
+
+.text {
+  width: 100%;
+  position: relative;
+  height: 100vh;
+  color: white;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .5em;
+  h2, p, ul li {
+    font-size: 1.6rem;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 1.1em;
+  }
+  display: none;
+}
+
+.gallery {
+  width: calc(100% - 1em);
+  position: absolute;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  .images {
+    position: fixed;
+    top: .25em;
+    height: calc(95vh + .5em);
+    width: 100%;
+
+    @media (max-width: 670px) {
+      width: 100%;
+      top: unset;
+      height: 60vh;
+    }
+
+    figure {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 1s ease-in-out, mix-blend-mode .5s ease-in-out;
+      opacity: 0;
+      mix-blend-mode: difference;
+      cursor: pointer;
+
+      &.visible {
+        opacity: 1;
+        mix-blend-mode: normal;
+      }
+
+      img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+}
