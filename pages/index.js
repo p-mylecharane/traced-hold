@@ -39,9 +39,9 @@ export default function Home() {
         <div className="gallery">
           <div className="intro">
             <a href="#about-section" onClick={handleAboutClick}>About</a>
-            <h1>“TRACED WORK”</h1>
+            <h1><span>TRACED WORK</span><br />“Grief Objects”</h1>
             <div className="socials">
-              <Link href="">IG</Link>, <Link href="">E</Link>
+              <Link href="https://www.instagram.com/tracedwork/">IG</Link>, <Link href="mailto:suzannemfraser@gmail.com">E</Link>
             </div>
           </div>
           <div className="images" onClick={handleImageClick}>
