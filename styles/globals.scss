@@ -28,9 +28,8 @@ body {
   font-family: 'CS';
   font-size: 3.2rem;
   line-height: 1.1;
-  padding: .5em;
   background: white;
-  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 // .images {
@@ -58,28 +57,52 @@ body {
 // }
 
 .images_count {
-  position: fixed;
-  top: 50%;
-  left: .5em;
-  transform: translateY(-50%);
-  width: calc(100% - 1em);
+  position: absolute;
+  top: 1em;
+  left: .25em;
+  right: .25em;
+  width: calc(100% - .5em);
   display: flex;
   justify-content: space-between;
   color: white;
   mix-blend-mode: difference;
   pointer-events: none;
+  display: none;
 }
 
 .intro {
   position: absolute;
   top: 0;
-  left: .5em;
-  right: .5em;
-  width: calc(100% - 1em);
+  left: .25em;
+  right: .25em;
+  width: calc(100% - .5em);
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   color: white;
   mix-blend-mode: difference;
   z-index: 1;
+  a {
+    color: white;
+    mix-blend-mode: difference;
+    text-decoration: none;
+  }
+}
+
+.footer {
+  margin-top: 4.4em;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: .5em;
+  p {
+    display: flex;
+    flex: 1;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 footer {
@@ -87,10 +110,9 @@ footer {
   bottom: .5em;
   left: .5em;
   right: .5em;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  width: calc(100% - 1em);
   color: white;
+  text-align: center;
   mix-blend-mode: difference;
   z-index: 1;
   div {
@@ -110,37 +132,46 @@ h1 {
 
 .text {
   width: 100%;
-  position: relative;
-  height: 100vh;
+  position: absolute;
+  top: 100vh;
   color: white;
   mix-blend-mode: difference;
   pointer-events: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: .5em;
+  padding: 1.5em .5em .5em .5em;
+
   h2, p, ul li {
-    font-size: 1.6rem;
+    // font-size: 1.6rem;
   }
   h2 {
     text-align: center;
     margin-bottom: 1.1em;
   }
-  display: none;
+  p {
+    &:last-of-type {
+      text-align: center;
+    }
+    & + p {
+      // padding-top: 1.1em;
+      text-indent: 4.4em;
+    }
+  }
+  
 }
 
 .gallery {
-  width: calc(100% - 1em);
-  position: absolute;
-  height: 100vh;
+  width: 100%;
+  height: calc(100vh - .5em);
+  position: relative;
   display: flex;
+  top: .25em;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 
   .images {
-    position: fixed;
-    top: .25em;
+    position: absolute;
+    top: -.25em;
     height: calc(95vh + .5em);
     width: 100%;
 
@@ -155,7 +186,7 @@ h1 {
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
+      height: 99vh;
       display: flex;
       justify-content: center;
       align-items: center;

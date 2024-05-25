@@ -1,13 +1,15 @@
 import Head from "next/head";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
   const images = [
-    { url: "/images/2308_16_SUZIE_FRASER-2.jpg" },
-    { url: "/images/2308_16_SUZIE_FRASER-3.jpg" },
-    { url: "/images/2308_16_SUZIE_FRASER-5.jpg" },
-    { url: "/images/2308_16_SUZIE_FRASER-10.jpg" },
-    { url: "/images/2308_16_SUZIE_FRASER-12.jpg" },
+    { url: "/images/2308_16_SUZIE_FRASER-10.jpg", caption: "No. 001 “HTC Dream with ritually sealed charging point” (2008)" },
+    { url: "/images/2308_16_SUZIE_FRASER-12.jpg", caption: "No. 002 “Mourners in one” (1470)" },
+    { url: "/images/2308_16_SUZIE_FRASER-5.jpg", caption: "No. 003.1 “First Tears” (2023)" },
+    { url: "/images/2308_16_SUZIE_FRASER-3.jpg", caption: "No. 003.2 “First Tears” (2023)" },
+    { url: "/images/2308_16_SUZIE_FRASER-2.jpg", caption: "No. 004 “What death/life might look like” (2023)" },
+    { url: "/images/2308_16_SUZIE_FRASER-9.jpg", caption: "No. 005 Print in the room” (1985)" },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -17,7 +19,12 @@ export default function Home() {
   };
 
   const formatNumber = (number) => {
-    return number.toString().padStart(2, '0');
+    return number.toString().padStart(3, '0');
+  };
+
+  const handleAboutClick = (e) => {
+    e.preventDefault();
+    document.getElementById("about-section").scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -30,7 +37,13 @@ export default function Home() {
       </Head>
       <main>
         <div className="gallery">
-          <div className="intro"><h1>“TRACED WORK”</h1> is an intermittent and itinerant museum telling stories from historians, communities, experts, artists, and a cosmic expanse of non-human knowledge holders.</div>
+          <div className="intro">
+            <a href="#about-section" onClick={handleAboutClick}>About</a>
+            <h1>“TRACED WORK”</h1>
+            <div className="socials">
+              <Link href="">IG</Link>, <Link href="">E</Link>
+            </div>
+          </div>
           <div className="images" onClick={handleImageClick}>
             {images.map((image, i) => (
               <figure
@@ -47,30 +60,21 @@ export default function Home() {
             <span>{formatNumber(images.length)}</span>
           </div>
         </div>
-        <div className="text">
-          <div>
-            <h2>Shared ritual</h2>
-            <p>“Traced Work” is a museum established in 2023. This project invites you into experiences, stories and rituals through proximity (both digital and physical) to the objects that collectively tell our histories. These includes my histories, belonging to the person writing this text, and your histories, the person reading it – as well as those of everyone else who participates in making the museum what it is. The objects in the museum include art works and historic artefacts, as well as books, sounds and spaces. Objects in the broadest sense.</p>
-            <p>You are invited to co-write the histories told through “Traced Work” by contributing your own object to the collection without it ever leaving your side.</p>
-            <p>The “Traced Work” digital archive acts as a platform for the stories of our objects to be held and shared – and to be recorded in history. In addition to the online archive, an ongoing series of itinerant physical exhibitions, tours and events – called experiences – encourage bodily closeness outside our heavily digitalised lives.</p>
-
-            <h2>Prioritising context</h2>
-            <p>“Traced Work” prioritises the contexts in which objects exist and the stories that connect one object to another. Every object in our world has a physical and cultural context – these contexts help us to learn from and about these objects.</p>
-            <p>In the “Traced Work” archive, records of each object will include:</p>
-            <ul>
-              <li>i) a detail photograph, and</li> 
-              <li>ii) a context photograph </li>
-            </ul>
-            <p>(measuring approx. 1m2 of space)</p>
-            <p>These two images are intended to together trace an outline of the object in its context. For non-visual objects in the archive, the detail and context photographs can show other representations of form and position, including sound waves, some sense of space-time positioning, and photos of spaces in which the objects were made. </p>
+        <div id="about-section" className="text">
+          <h2>No. 1<br />“Grief Objects” </h2>
+          <p>In early 2023, a group of objects was found by staff of the St Georges Motor Inn in Naarm/Melbourne. They have since been catalogued and restaged in the room they were found in by Traced Work using social media posts by hotel staff at the time of the initial discovery. Interesting, the source of the sound in the room has never been found and has been consistently playing for 12 months. Cataloguers, investigators and hotel staff have all reported feeling changed by the sound after encountering it.</p>
+          <p>The art works and artefacts found in the room date from 100,033 BCE to the present day and appear to tell a story of human experiences of grief and our species’ sometimes unhappy relationship with being-mortal.</p>
+          <p>Working with historians, quantum physicists and archaeologists, Traced Work has been able to piece together tentative and sometimes inconsistent descriptions of each of the objects and how they relate to each other.</p>
+          <p>Current thinking is that the room was briefly triggered as a portal or tunnel in space-time and the objects were either inadvertently or intentionally gathered into proximity through their dynamic material interconnections. In other words, these objects, all from different points in our universe’s space-time, were attracted by a repeating energy pulse which corresponds to a strand of information to which they all belong, trapping the objects in the room when the pulse concluded. The pattern of the pulse, it is hypothesised, may have been similar to that of irregular crying convulsions often expressed by humans when experiencing grief, which has been repeatedly registered in the cosmos in recent decades.</p>
+          <br /><p>Tours of Room 1<br />will run daily from 24 to 26 May 2024.</p>
+          <div className="footer">
+            <p>24.<br />–26 May, 2024<br />St Georges Motor Inn<br/>(Narrm)</p>
+            <p>001–005</p>
           </div>
-          <div></div>
-          <div></div>
         </div>
       </main>
       <footer>
-        <div>6 (objects)</div>
-        <div>12 (connections)</div>
+        <figcaption>{images[currentIndex].caption}</figcaption>
       </footer>
     </>
   );
