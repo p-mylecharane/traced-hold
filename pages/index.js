@@ -1,5 +1,6 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 export default function Home() {
@@ -13,6 +14,14 @@ export default function Home() {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.pathname === "/about") {
+      setShowOverlay(true);
+    }
+  }, [router.pathname]);
 
   const handleImageClick = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -24,8 +33,31 @@ export default function Home() {
 
   const handleAboutClick = (e) => {
     e.preventDefault();
-    document.getElementById("about-section").scrollIntoView({ behavior: "smooth" });
+    setShowOverlay(true);
+    window.history.pushState({}, "", "/about");
   };
+
+  const handleCloseClick = (e) => {
+    e.preventDefault();
+    setShowOverlay(false);
+    window.history.pushState({}, "", "/");
+  };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      if (window.location.pathname === "/about") {
+        setShowOverlay(true);
+      } else {
+        setShowOverlay(false);
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
 
   return (
     <>
@@ -36,9 +68,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="gallery">
+        <div className={`gallery ${showOverlay ? "overlay-visible" : ""}`}>
           <div className="intro">
-            <a href="#about-section" onClick={handleAboutClick}>About</a>
+            <a href="/about" onClick={handleAboutClick}>About</a>
             <h1><span>TRACED WORK</span><br />“Grief Objects”</h1>
             <div className="socials">
               <Link href="https://www.instagram.com/tracedwork/">IG</Link>, <Link href="mailto:suzannemfraser@gmail.com">E</Link>
@@ -54,13 +86,9 @@ export default function Home() {
               </figure>
             ))}
           </div>
-          <div className="images_count">
-            <span>{formatNumber(currentIndex + 1)}</span>
-            <span>of</span>
-            <span>{formatNumber(images.length)}</span>
-          </div>
         </div>
-        <div id="about-section" className="text">
+        <div className={`text ${showOverlay ? "show" : ""}`} id="about-section">
+          <span className="text_close" onClick={handleCloseClick}>(close)</span>
           <h2>No. 1<br />“Grief Objects” </h2>
           <p>In early 2023, a group of objects was found by staff of the St Georges Motor Inn in Naarm/Melbourne. They have since been catalogued and restaged in the room they were found in by Traced Work using social media posts by hotel staff at the time of the initial discovery. Interesting, the source of the sound in the room has never been found and has been consistently playing for 12 months. Cataloguers, investigators and hotel staff have all reported feeling changed by the sound after encountering it.</p>
           <p>The art works and artefacts found in the room date from 100,033 BCE to the present day and appear to tell a story of human experiences of grief and our species’ sometimes unhappy relationship with being-mortal.</p>

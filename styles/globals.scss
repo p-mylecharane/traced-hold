@@ -10,7 +10,6 @@
   font-style: italic;
 }
 
-
 * {
   margin: 0;
   padding: 0;
@@ -31,30 +30,6 @@ body {
   background: white;
   overflow-x: hidden;
 }
-
-// .images {
-//   position: fixed;
-//   top: .5em;
-//   right: .5em;
-//   bottom: .5em;
-//   left: .5em;
-//   z-index: 0;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-
-//   figure {
-//     max-height: 98vh;
-//     background-color: white;
-//     &:not(:first-of-type) {
-//       display: none;
-//     }
-//     img {
-//       max-width: 100%;
-//       display: block;
-//     }
-//   }
-// }
 
 .images_count {
   position: absolute;
@@ -141,12 +116,33 @@ h1 {
 
 .text {
   width: 100%;
-  position: absolute;
-  top: 100vh;
-  color: white;
-  mix-blend-mode: difference;
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  max-height: 100vh;
+  background: white;
+  color: black;
+  z-index: 10;
+  overflow-y: auto;
   pointer-events: none;
-  padding: 1.5em .5em .5em .5em;
+  padding: .5em;
+  transition: bottom 0.5s ease-in-out;
+
+  &_close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: .5em;
+    &:hover {
+      cursor: pointer;
+      color: #ccc;
+    }
+  }
+
+  &.show {
+    bottom: 0;
+    pointer-events: all;
+  }
 
   h2 {
     text-align: center;
@@ -157,11 +153,9 @@ h1 {
       text-align: center;
     }
     & + p {
-      // padding-top: 1.1em;
       text-indent: 4.4em;
     }
   }
-  
 }
 
 .gallery {
